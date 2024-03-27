@@ -1,7 +1,7 @@
 # Performance Optimization Tips in Angular
 
 - lazy loading (defer loading if on angular 17, use schematics to convert form old control flow to new `ng generate @angular/core:control-flow`)  - because it is importing modules at the runtime where it is resloved as a Promise
-- use nx (prebuild caching for builds and tests), also it is possible to see dependency graph
+- use nx (prebuild caching for builds and tests), also it is possible to see the dependency graph
 ```
 nx dep-graph --file=output.html
 
@@ -28,13 +28,13 @@ In package.json
 - Use OnPush change detection that only runs when:
 ```
 - Input property reference changes
-- Output property/eventemiiter or DOM event fires
+- Output property/event emitter or DOM event fires
 - Async pipe receives an event
 - Change detection is manually invoked via ChangeDetectorRef
 ```
 
 - Add trackBy to every ngFor
-- Treeshaking - dead code elimination - removing unnecessary modules from the bundle
+- Tree shaking - dead code elimination - removing unnecessary modules from the bundle
 ```
 One example could be:
 importing *  as _ from loadash 
@@ -48,7 +48,10 @@ import { Observable } from 'rxjs'
 Better to use:
 import { Observable } from 'rxjs/internal/Observable'
 
-Also take into consideration that it impacts css as well with using @import 
+Also, take into consideration that it impacts css as well with using @import 
 ```
+- Check if --optimization flag is used when building the project
+- Use Web Workers: For non-UI related tasks, consider offloading them to Web Workers.
+- Implement SSR with Angular Universal
+- For future-proof use CLI budgets to prevent regressions in the future
 
-- For futureproof use CLI budgets to prevent regressions in the future 
