@@ -1,6 +1,7 @@
 # Performance Optimization Tips in Angular
 
-- lazy loading (defer loading if on angular 17, use schematics to convert form old control flow to new `ng generate @angular/core:control-flow`)  - because it is importing modules at the runtime where it is resloved as a Promise
+- lazy loading (defer loading if on angular 17, use schematics to convert form old control flow to 
+  new `ng generate @angular/core:control-flow`)  - because it is importing modules at the runtime where it is resolved as a Promise
 - use nx (prebuild caching for builds and tests), also it is possible to see the dependency graph
 ```
 nx dep-graph --file=output.html
@@ -10,7 +11,7 @@ nx run dashboard:build --prod
   
 ```
 
-- change functions that structure data in html to pipes where possible, use @memo decorator for better caching of primitive values
+- change functions that structure data in HTML to pipes where possible, use @memo decorator for better caching of primitive values
 - check for leaky subscriptions (unsubscribe)
 - use webpack bundle analyzer (https://www.npmjs.com/package/webpack-bundle-analyzer) to check each module size and dependencies
 ```
@@ -39,7 +40,8 @@ In package.json
 One example could be:
 importing *  as _ from loadash 
 
-better instead of using default loadash package use loadash-es which exports each function as ES module and remove the unnecessary code from the bundle
+better instead of using default loadash package use loadash-es which exports each function as 
+ES module and remove the unnecessary code from the bundle
 
 
 Another example could be using the whole rxjs library:
@@ -51,7 +53,11 @@ import { Observable } from 'rxjs/internal/Observable'
 Also, take into consideration that it impacts css as well with using @import 
 ```
 - Check if --optimization flag is used when building the project
+- Use Chrome Profiler to detect "most expensive" operations/tasks
 - Use Web Workers: For non-UI related tasks, consider offloading them to Web Workers.
-- Implement SSR with Angular Universal
+- Implement hybrid rendering with Angular Universal
+- Implement SSR
+- Check if server compression is turned on
+-  Use `defer` on scripts that are not required immediately
 - For future-proof use CLI budgets to prevent regressions in the future
 
